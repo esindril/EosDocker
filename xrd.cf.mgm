@@ -1,0 +1,74 @@
+###########################################################
+xrootd.fslib libXrdEosMgm.so
+xrootd.seclib libXrdSec.so
+xrootd.async off nosf
+xrootd.chksum eos
+###########################################################
+
+xrd.sched mint 8 maxt 256 idle 64
+###########################################################
+all.export /
+all.role manager
+###########################################################
+oss.fdlimit 16384 32768
+###########################################################
+# UNIX authentication
+sec.protocol unix
+# SSS authentication
+sec.protocol sss -c /etc/eos.keytab -s /etc/eos.keytab
+# KRB  authentication
+#sec.protocol krb5 host/<host>@CERN.CH
+# GSI authentication
+#sec.protocol gsi -crl:0 -cert:/etc/grid-security/daemon/hostcert.pem -key:/etc/grid-security/daemon/hostkey.pem -gridmap:/etc/grid-security/grid-mapfile -d:0 -gmapopt:2
+
+###########################################################
+sec.protbind localhost.localdomain unix 
+sec.protbind localhost unix sss
+sec.protbind * only unix sss
+#sec.protbind localhost.localdomain unix sss
+#sec.protbind localhost unix sss
+#sec.protbind * only krb5 gsi sss unix
+###########################################################
+mgmofs.fs /
+mgmofs.targetport 1095
+#mgmofs.authlib libXrdAliceTokenAcc.so
+#mgmofs.authorize 1
+###########################################################
+#mgmofs.trace all debug
+# this URL can be overwritten by EOS_BROKER_URL defined in /etc/sysconfig/eos
+
+mgmofs.broker root://localhost:1097//eos/
+# this name can be overwritten by EOS_INSTANCE_NAME defined in /etc/sysconfig/eos
+mgmofs.instance eosdev
+
+# configuration and namespace location
+mgmofs.configdir /var/eos/config
+mgmofs.metalog /var/eos/md
+mgmofs.txdir /var/eos/tx
+mgmofs.authdir /var/eos/auth
+
+# report store path
+mgmofs.reportstorepath /var/eos/report
+
+# record store is enabled by default
+mgmofs.reportstore true
+
+# record namespace is disabled by default - can be enabled on the fly with the 'io' command
+mgmofs.reportnamespace false
+
+# this defines the default config to load
+mgmofs.autoloadconfig default
+
+# this enables that every change get's immedeatly stored to the active configuration - can be overwritten by EOS_AUTOSAVE_CONFIG defined in /etc/sysconfig/eos
+mgmofs.autosaveconfig true
+
+# this has to be defined if we have a failover configuration via alias - can be overwritten by EOS_MGM_ALIAS in /etc/sysconfig/eos
+#mgmofs.alias eosdev.cern.ch
+
+# Set the number of authentication worker threads running on the mgm
+mgmofs.auththreads 10
+
+# Set the front end port number for incoming authentication requests
+mgmofs.authport 15555
+
+###########################################################

@@ -1,0 +1,5 @@
+[eos-beryl]
+name=EOS 0.3 Version
+baseurl=http://eos.cern.ch/rpms/eos-beryl/slc-6-x86_64/
+gpgcheck=0
+enabled=1

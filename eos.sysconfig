@@ -1,0 +1,140 @@
+# ----------------------------------------------------------------------
+# File: eos.example
+# Author: Andreas-Joachim Peters - CERN
+# ----------------------------------------------------------------------
+
+# ************************************************************************
+# * EOS - the CERN Disk Storage System                                   *
+# * Copyright (C) 2011 CERN/Switzerland                                  *
+# *                                                                      *
+# * This program is free software: you can redistribute it and/or modify *
+# * it under the terms of the GNU General Public License as published by *
+# * the Free Software Foundation, either version 3 of the License, or    *
+# * (at your option) any later version.                                  *
+# *                                                                      *
+# * This program is distributed in the hope that it will be useful,      *
+# * but WITHOUT ANY WARRANTY; without even the implied warranty of       *
+# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        *
+# * GNU General Public License for more details.                         *
+# *                                                                      *
+# * You should have received a copy of the GNU General Public License    *
+# * along with this program.  If not, see <http://www.gnu.org/licenses/>.*
+# ************************************************************************
+
+# Should we run with another limit on the core file size other than the default?
+DAEMON_COREFILE_LIMIT=unlimited
+
+# Disable the KRB5 replay cache
+export KRB5RCACHETYPE=none
+
+# What roles should the xroot daemon run for. For each role you can overwrite
+# the default options using a dedicate sysconfig file
+# e.g. /etc/sysconfig/xrd.<role>. The role based mechanism allows for
+# multiple xrd's running with different options to be controlled via
+# the same initd script
+
+XRD_ROLES="mq sync mgm fst"
+
+# ------------------------------------------------------------------
+# EOS Configuration
+# ------------------------------------------------------------------
+
+# The EOS instance name
+export EOS_INSTANCE_NAME=eostest
+
+# The EOS configuration to load after daemon start
+export EOS_AUTOLOAD_CONFIG=default
+
+# The EOS broker URL 
+export EOS_BROKER_URL=root://localhost:1097//eos/
+
+# The EOS host geo location tag used to sort hosts into geographical (rack) locations 
+export EOS_GEOTAG=""
+
+# The fully qualified hostname of MGM master1
+export EOS_MGM_MASTER1=eostest
+
+# The fully qualified hostname of MGM master2
+export EOS_MGM_MASTER2=eostest
+
+# The alias which selects master 1 or 2
+export EOS_MGM_ALIAS=eostest
+
+# The mail notification in case of fail-over
+#export EOS_MAIL_CC="apeters@mail.cern.ch"
+#export EOS_NOTIFY="mail -s `date +%s`-`hostname`-eos-notify $EOS_MAIL_CC"
+
+# Enable core dumps initiated internally 
+#export EOS_CORE_DUMP
+
+# Disable shutdown/signal handlers for debugging
+#export EOS_NO_SHUTDOWN
+
+# ------------------------------------------------------------------
+# FUSE Configuration
+# ------------------------------------------------------------------
+
+# The mount directory for 'eosd' 
+export EOS_FUSE_MOUNTDIR=/eos/
+
+# The MGM host from where to do the inital mount
+export EOS_FUSE_MGM_ALIAS=eostest
+
+# Enable FUSE debugging mode (default off)
+#export EOS_FUSE_DEBUG=1
+
+# Disable parallel IO mode (default on)
+#export EOS_FUSE_NOPIO=1
+
+# Disable multithreading in FUSE (default on)
+#export EOS_FUSE_NO_MT=1
+
+# ------------------------------------------------------------------
+# HTTPD Configuration
+# ------------------------------------------------------------------
+# Enable multithreaded httpd
+export EOS_HTTP_THREADPOOL=1
+
+# Configure the thread-pool with 16 threads
+export EOS_HTTP_THREADPOOL_SIZE=16
+
+# ------------------------------------------------------------------
+# Federation Configuration
+# ------------------------------------------------------------------
+
+# The host[:port] name of the meta manager (global redirector)
+#export EOS_FED_MANAGER=eos.cern.ch:1094
+
+# The port of the PSS xrootd server
+#export EOS_PSS_PORT=1098
+
+# The hostname[:port] of the EOS MGM service
+#export EOS_PSS_MGM=$EOS_MGM_ALIAS:1094
+
+# The path which should be proxied (/ for all)
+#export EOS_PSS_PATH=/
+
+# ------------------------------------------------------------------
+# Test Configuration
+# ------------------------------------------------------------------
+
+# mail notification for failed tests
+#export EOS_TEST_MAILNOTIFY=apeters@mail.cern.ch
+
+# SMS notification for failed tests
+#export EOS_TEST_GSMNOTIFY="0041764875002@mail2sms.cern.ch"
+
+# Instance name = name of directory at deepness 2 /eos/<instance>/
+#export EOS_TEST_INSTANCE="dev"
+
+# MGM host redirector
+export EOS_TEST_REDIRECTOR=localhost
+
+# local test output directory
+export EOS_TEST_TESTSYS=/tmp/eos-instance-test/
+
+# time to lock re-sending of SMS for consecutively failing tests
+export EOS_TEST_GSMLOCKTIME=3600
+
+# max. time given to the test to finish
+export EOS_TEST_TESTTIMESLICE=300;

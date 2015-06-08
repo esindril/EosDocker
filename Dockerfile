@@ -27,17 +27,23 @@ ADD xrd.cf.fst6 /etc/xrd.cf.fst6
 # Add EOS setup script
 ADD eos_setup.sh /tmp/eos_setup.sh
 
+# Instal XRootD 3.3.6 dependency
+RUN yum -y --nogpg install perl
+ENV XRD_VER 3.3.6
+RUN yum --disablerepo="*" --enablerepo="eos-beryl" -y --nogpg install \
+    xrootd-$XRD_VER \
+    xrootd-client-$XRD_VER \
+    xrootd-client-libs-$XRD_VER \
+    xrootd-libs-$XRD_VER \
+    xrootd-server-devel-$XRD_VER \
+    xrootd-server-libs-$XRD_VER
+
 # Install EOS 
 RUN yum -y --nogpg install eos-server eos-testkeytab
 
 # Start the eos instance in master mode
 RUN service eos master mgm
 RUN service eos master mq
-
-# Install supervisor to start the eos service
-# RUN yum -y --nogpg install supervisor 
-# ADD supervisor.conf /etc/supervisor/conf.d/supervisord.conf
-# CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf && 
 
 # Finish configuration of EOS
 RUN mkdir /home/data && \

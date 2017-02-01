@@ -40,25 +40,25 @@ XRD_ROLES="mq sync mgm fst1 fst2 fst3 fst4 fst5 fst6"
 # ------------------------------------------------------------------
 
 # The EOS instance name
-export EOS_INSTANCE_NAME=eostest
+export EOS_INSTANCE_NAME=DUMMY_INSTANCE_TO_REPLACE
 
 # The EOS configuration to load after daemon start
 export EOS_AUTOLOAD_CONFIG=default
 
 # The EOS broker URL 
-export EOS_BROKER_URL=root://localhost:1097//eos/
+export EOS_BROKER_URL=root://DUMMY_HOST_TO_REPLACE:1097//eos/
 
 # The EOS host geo location tag used to sort hosts into geographical (rack) locations 
-export EOS_GEOTAG=""
+export EOS_GEOTAG="DUMMY_HOST_TO_REPLACE"
 
 # The fully qualified hostname of MGM master1
-export EOS_MGM_MASTER1=eostest.cern.ch
+export EOS_MGM_MASTER1=DUMMY_HOST_TO_REPLACE
 
 # The fully qualified hostname of MGM master2
-export EOS_MGM_MASTER2=eostest1.cern.ch
+export EOS_MGM_MASTER2=DUMMY_HOST_TO_REPLACE
 
 # The alias which selects master 1 or 2
-export EOS_MGM_ALIAS=eostest.cern.ch
+export EOS_MGM_ALIAS=DUMMY_HOST_TO_REPLACE
 
 # The mail notification in case of fail-over
 #export EOS_MAIL_CC="apeters@mail.cern.ch"
@@ -137,4 +137,4 @@ export EOS_TEST_TESTSYS=/tmp/eos-instance-test/
 export EOS_TEST_GSMLOCKTIME=3600
 
 # max. time given to the test to finish
-export EOS_TEST_TESTTIMESLICE=300;
+export EOS_TEST_TESTTIMESLICE=300

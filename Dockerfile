@@ -1,63 +1,35 @@
 #
 # Simple EOS Docker file 
 #
-# Version 0.1
+# Version 0.2
 
 # Use the fedora base image
-FROM fedora:20
-MAINTAINER Elvin Sindrilaru, esindril@cern.ch, CERN 2014
+FROM centos:7
+MAINTAINER Elvin Sindrilaru, esindril@cern.ch, CERN 2017
 
-# Add the EOS repository
-ADD eos.repo /etc/yum.repos.d/eos.repo
+RUN yum -y --nogpg update
 
-# Create the /var/lock/subsys directory needed by the eos daemons
-ADD eos.conf /etc/tmpfiles.d/eos.conf
-RUN systemd-tmpfiles --create /etc/tmpfiles.d/eos.conf
+# Add required repositories
+ADD *.repo /etc/yum.repos.d/
 
-# Configuration files for the EOS test instance
+# Add configuration files for EOS instance
 ADD eos.sysconfig /etc/sysconfig/eos
-ADD xrd.cf.mgm /etc/xrd.cf.mgm
-ADD xrd.cf.fst1 /etc/xrd.cf.fst1
-ADD xrd.cf.fst2 /etc/xrd.cf.fst2
-ADD xrd.cf.fst3 /etc/xrd.cf.fst3
-ADD xrd.cf.fst4 /etc/xrd.cf.fst4
-ADD xrd.cf.fst5 /etc/xrd.cf.fst5
-ADD xrd.cf.fst6 /etc/xrd.cf.fst6
+ADD xrd.cf.* /etc/
 
-# Add EOS setup script
-ADD eos_setup.sh /tmp/eos_setup.sh
-
-# Instal XRootD 3.3.6 dependency
-RUN yum -y --nogpg install perl
-ENV XRD_VER 3.3.6
-RUN yum --disablerepo="*" --enablerepo="eos-beryl" -y --nogpg install \
-    xrootd-$XRD_VER \
-    xrootd-client-$XRD_VER \
-    xrootd-client-libs-$XRD_VER \
-    xrootd-libs-$XRD_VER \
-    xrootd-server-devel-$XRD_VER \
-    xrootd-server-libs-$XRD_VER
+# Instal XRootD
+ENV XRD_VERSION 4.5.0
+RUN yum -y --nogpg install \
+    xrootd-$XRD_VERSION \
+    xrootd-client-$XRD_VERSION \
+    xrootd-client-libs-$XRD_VERSION \
+    xrootd-libs-$XRD_VERSION \
+    xrootd-server-devel-$XRD_VERSION \
+    xrootd-server-libs-$XRD_VERSION
 
 # Install EOS 
-RUN yum -y --nogpg install eos-server eos-testkeytab
-
-# Start the eos instance in master mode
-RUN service eos master mgm
-RUN service eos master mq
-
-# Finish configuration of EOS
-RUN mkdir /home/data && \
-    mkdir /home/data/eos1 && \
-    mkdir /home/data/eos2 && \
-    mkdir /home/data/eos3 && \
-    mkdir /home/data/eos4 && \
-    mkdir /home/data/eos5 && \
-    mkdir /home/data/eos6 
-
-RUN chmod +x /tmp/eos_setup.sh
-RUN chown -R daemon:daemon /home/data/*
-
-CMD service eos restart && \
-    /tmp/eos_setup.sh && \
-    /bin/bash
+RUN yum -y --nogpg install\
+    eos-server eos-testkeytab quarkdb\
+    initscripts less emasc && yum clean all
+ADD eos_setup.sh /
+ENTRYPOINT ["/bin/bash"]
 

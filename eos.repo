@@ -1,5 +1,11 @@
-[eos-beryl]
-name=EOS 0.3 Version
-baseurl=http://eos.cern.ch/rpms/eos-beryl/slc-6-x86_64/
+[eos]
+name=EOS 4 Version
+baseurl=https://dss-ci-repo.web.cern.ch/dss-ci-repo/eos/ns_quarkdb/commit/el-7/x86_64/
+gpgcheck=0
+enabled=1
+
+[eos-depend]
+name=EOS 4 Dependencies
+baseurl=https://dss-ci-repo.web.cern.ch/dss-ci-repo/eos/ns_quarkdb-depend/el-7-x86_64/
 gpgcheck=0
 enabled=1

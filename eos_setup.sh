@@ -1,4 +1,4 @@
-#! /bin/bash 
+#! /bin/bash
 
 # Script used to register the filesystems in EOS and enable all the features
 # necessary for a default setup
@@ -45,14 +45,13 @@ do
     echo "$i" > $DATADIR/.eosfsid
     chown -R daemon:daemon $DATADIR
     eos -b fs add -m $i $UUID $HOSTNAME:$((2000+$i)) $DATADIR default rw
-    eos -b node set $HOSTNAME:$((2000+$i)) on    
-done 
+    eos -b node set $HOSTNAME:$((2000+$i)) on
+done
 
-eos -b space quota default off 
-eos -b space set default on 
-eos -b vid enable sss 
+eos -b space quota default off
+eos -b space set default on
+eos -b vid enable sss
 eos -b vid enable unix
 eos -b fs boot \*
-eos -b config save -f default 
+eos -b config save -f default
 /bin/bash
-

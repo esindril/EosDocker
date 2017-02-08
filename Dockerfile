@@ -28,6 +28,6 @@ RUN yum -y --nogpg install \
 # Install EOS
 RUN yum -y --nogpg install\
     eos-server eos-testkeytab quarkdb\
-    initscripts less emasc && yum clean all
+    initscripts less emacs && yum clean all
 ADD eos_setup.sh /
 ENTRYPOINT ["/bin/bash"]

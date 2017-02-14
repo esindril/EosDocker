@@ -24,7 +24,7 @@ sec.protocol sss -c /etc/eos.keytab -s /etc/eos.keytab
 ###########################################################
 sec.protbind localhost.localdomain unix 
 sec.protbind localhost unix sss
-sec.protbind * only unix sss
+sec.protbind * only sss unix
 #sec.protbind localhost.localdomain unix sss
 #sec.protbind localhost unix sss
 #sec.protbind * only krb5 gsi sss unix
@@ -37,9 +37,9 @@ mgmofs.targetport 1095
 #mgmofs.trace all debug
 # this URL can be overwritten by EOS_BROKER_URL defined in /etc/sysconfig/eos
 
-mgmofs.broker root://localhost:1097//eos/
+mgmofs.broker root://eos-mq-test.cern.ch:1097//eos/
 # this name can be overwritten by EOS_INSTANCE_NAME defined in /etc/sysconfig/eos
-mgmofs.instance eosdev
+mgmofs.instance eos-docker-test
 
 # configuration and namespace location
 mgmofs.configdir /var/eos/config

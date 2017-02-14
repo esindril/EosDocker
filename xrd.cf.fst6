@@ -19,7 +19,7 @@ ofs.osslib libEosFstOss.so
 ofs.tpc pgm /usr/bin/xrdcp
 ###########################################################
 # this URL can be overwritten by EOS_BROKER_URL defined /etc/sysconfig/xrd
-fstofs.broker root://localhost:1097//eos/
+fstofs.broker root://eos-mq-test.cern.ch:1097//eos/
 fstofs.autoboot true
 fstofs.quotainterval 10
 fstofs.metalog /var/eos/md/

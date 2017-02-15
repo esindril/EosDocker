@@ -37,9 +37,9 @@ mgmofs.targetport 1095
 #mgmofs.trace all debug
 # this URL can be overwritten by EOS_BROKER_URL defined in /etc/sysconfig/eos
 
-mgmofs.broker root://eos-mq-test.cern.ch:1097//eos/
+mgmofs.broker root://eos-mq-test.eoscluster.cern.ch:1097//eos/
 # this name can be overwritten by EOS_INSTANCE_NAME defined in /etc/sysconfig/eos
-mgmofs.instance eos-docker-test
+mgmofs.instance eosdockertest
 
 # configuration and namespace location
 mgmofs.configdir /var/eos/config

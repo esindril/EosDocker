@@ -40,25 +40,25 @@ XRD_ROLES="mq sync mgm fst1 fst2 fst3 fst4 fst5 fst6"
 # ------------------------------------------------------------------
 
 # The EOS instance name
-export EOS_INSTANCE_NAME=eos-docker-test
+export EOS_INSTANCE_NAME=eosdockertest
 
 # The EOS configuration to load after daemon start
 export EOS_AUTOLOAD_CONFIG=default
 
 # The EOS broker URL 
-export EOS_BROKER_URL=root://eos-mq-test.cern.ch:1097//eos/
+export EOS_BROKER_URL=root://eos-mq-test.eoscluster.cern.ch:1097//eos/
 
 # The EOS host geo location tag used to sort hosts into geographical (rack) locations 
 export EOS_GEOTAG="docker-test"
 
 # The fully qualified hostname of MGM master1
-export EOS_MGM_MASTER1=eos-mgm-test.cern.ch
+export EOS_MGM_MASTER1=eos-mgm-test.eoscluster.cern.ch
 
 # The fully qualified hostname of MGM master2
-export EOS_MGM_MASTER2=eos-mgm-test.cern.ch
+export EOS_MGM_MASTER2=eos-mgm-test.eoscluster.cern.ch
 
 # The alias which selects master 1 or 2
-export EOS_MGM_ALIAS=eos-mgm-test.cern.ch
+export EOS_MGM_ALIAS=eos-mgm-test.eoscluster.cern.ch
 
 # The mail notification in case of fail-over
 #export EOS_MAIL_CC="apeters@mail.cern.ch"

@@ -33,5 +33,5 @@ ADD eos_setup.sh /
 ADD eos_mq_setup.sh /
 ADD eos_mgm_setup.sh /
 ADD eos_fst_setup.sh /
-ADD eos_fs_setup.sh /
+ADD eos_mgm_fs_setup.sh /
 ENTRYPOINT ["/bin/bash"]

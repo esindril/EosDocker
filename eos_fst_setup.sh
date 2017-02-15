@@ -3,7 +3,7 @@
 FSTHOSTNAME=$(hostname -f)
 
 source /etc/sysconfig/eos
-export EOS_MGM_URL=root://eos-mgm-test.cern.ch//
+export EOS_MGM_URL=root://eos-mgm-test.eoscluster.cern.ch//
 
 for i in {1..6}
 do

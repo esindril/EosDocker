@@ -13,7 +13,7 @@ all.trace none
 all.manager localhost 2131
 #ofs.trace open
 ###########################################################
-xrd.port 2001
+xrd.port 1095
 ofs.persist off
 ofs.osslib libEosFstOss.so
 ofs.tpc pgm /usr/bin/xrdcp

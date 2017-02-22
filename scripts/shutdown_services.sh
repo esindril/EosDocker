@@ -13,4 +13,10 @@ do
     docker rm $FSTHOSTNAME
 done
 
+docker stop eos-client-test
+docker rm eos-client-test
+
+docker stop eos-krb-test
+docker rm eos-krb-test
+
 docker network rm eoscluster.cern.ch

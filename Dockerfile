@@ -14,6 +14,7 @@ ADD *.repo /etc/yum.repos.d/
 # Add configuration files for EOS instance
 ADD eos.sysconfig /etc/sysconfig/eos
 ADD xrd.cf.* /etc/
+ADD krb5.conf /etc/
 
 # Instal XRootD
 ENV XRD_VERSION 4.5.0
@@ -25,13 +26,17 @@ RUN yum -y --nogpg install \
     xrootd-server-devel-$XRD_VERSION \
     xrootd-server-libs-$XRD_VERSION
 
+RUN yum -y install heimdal-server heimdal-workstation krb5-workstation
+
 # Install EOS
 RUN yum -y --nogpg install\
     eos-server eos-testkeytab quarkdb\
     initscripts less emacs && yum clean all
+
 ADD eos_setup.sh /
 ADD eos_mq_setup.sh /
 ADD eos_mgm_setup.sh /
 ADD eos_fst_setup.sh /
 ADD eos_mgm_fs_setup.sh /
+ADD kdc.sh /
 ENTRYPOINT ["/bin/bash"]
